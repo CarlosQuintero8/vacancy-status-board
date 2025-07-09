@@ -90,7 +90,7 @@ Este proyecto está bajo la Licencia MIT.
 
 ## 👨‍💻 Autor
 
-**Carlos Quintero** - Desarrollador Full Stack
+**Carlos Quintero** - Desarrollador Web Jr Full Stack
 
 ---
 
