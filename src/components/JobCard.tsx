@@ -72,15 +72,13 @@ export const JobCard = ({ application, onDelete, onEdit }: JobCardProps) => {
           {application.link && (
             <Button variant="outline" size="sm" asChild>
               <a href={application.link} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-1" />
-                Ver Vacante
+                <ExternalLink className="w-4 h-4" />
               </a>
             </Button>
           )}
           
           <Button variant="outline" size="sm" onClick={() => onEdit(application)}>
-            <Edit className="w-4 h-4 mr-1" />
-            Editar
+            <Edit className="w-4 h-4" />
           </Button>
           
           <Button 
@@ -89,8 +87,7 @@ export const JobCard = ({ application, onDelete, onEdit }: JobCardProps) => {
             onClick={() => onDelete(application.id)}
             className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
           >
-            <Trash2 className="w-4 h-4 mr-1" />
-            Eliminar
+            <Trash2 className="w-4 h-4" />
           </Button>
         </div>
       </CardContent>

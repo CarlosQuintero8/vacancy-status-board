@@ -7,8 +7,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { JobApplication, JobStatus, STATUS_OPTIONS } from '@/types/job';
-import { Calendar, CalendarIcon } from 'lucide-react';
+import { CalendarIcon } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
@@ -134,8 +135,8 @@ export const JobForm = ({ onSubmit, onCancel }: JobFormProps) => {
                     mode="single"
                     selected={date}
                     onSelect={setDate}
-                    className="pointer-events-auto"
                     initialFocus
+                    className="pointer-events-auto"
                   />
                 </PopoverContent>
               </Popover>
