@@ -18,6 +18,7 @@ const Index = () => {
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<JobStatus | 'ALL'>('ALL');
+  const [editingApplication, setEditingApplication] = useState<JobApplication | null>(null);
 
   const filteredApplications = applications.filter(app => {
     const matchesSearch = searchTerm === '' || 
@@ -48,12 +49,21 @@ const Index = () => {
     });
   };
 
-  const handleEditApplication = (application: any) => {
-    // Por simplicidad, mostraremos un toast indicando que la funcionalidad está disponible
-    toast({
-      title: "Función de edición",
-      description: "La función de edición estará disponible en una próxima versión.",
-    });
+  const handleEditApplication = (application: JobApplication) => {
+    setEditingApplication(application);
+    setShowForm(true);
+  };
+
+  const handleUpdateApplication = (updatedData: Omit<JobApplication, 'id' | 'createdAt'>) => {
+    if (editingApplication) {
+      updateApplication(editingApplication.id, updatedData);
+      setEditingApplication(null);
+      setShowForm(false);
+      toast({
+        title: "Postulación actualizada",
+        description: "La postulación se ha actualizado correctamente.",
+      });
+    }
   };
 
   const getStatusCount = (status: JobStatus) => {
@@ -64,8 +74,13 @@ const Index = () => {
     return (
       <div className="min-h-screen bg-background p-4">
         <JobForm 
-          onSubmit={handleAddApplication}
-          onCancel={() => setShowForm(false)}
+          onSubmit={editingApplication ? handleUpdateApplication : handleAddApplication}
+          onCancel={() => {
+            setShowForm(false);
+            setEditingApplication(null);
+          }}
+          initialData={editingApplication || undefined}
+          isEditing={!!editingApplication}
         />
       </div>
     );

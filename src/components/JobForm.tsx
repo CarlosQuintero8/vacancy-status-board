@@ -17,21 +17,25 @@ import { cn } from '@/lib/utils';
 interface JobFormProps {
   onSubmit: (application: Omit<JobApplication, 'id' | 'createdAt'>) => void;
   onCancel: () => void;
+  initialData?: JobApplication;
+  isEditing?: boolean;
 }
 
-export const JobForm = ({ onSubmit, onCancel }: JobFormProps) => {
+export const JobForm = ({ onSubmit, onCancel, initialData, isEditing = false }: JobFormProps) => {
   const [formData, setFormData] = useState({
-    perfilVacante: '',
-    empresa: '',
-    tecnologias: '',
-    plataforma: '',
-    link: '',
-    fechaPostulacion: '',
-    contactoReclutador: '',
-    status: 'EN_PROCESO' as JobStatus,
+    perfilVacante: initialData?.perfilVacante || '',
+    empresa: initialData?.empresa || '',
+    tecnologias: initialData?.tecnologias || '',
+    plataforma: initialData?.plataforma || '',
+    link: initialData?.link || '',
+    fechaPostulacion: initialData?.fechaPostulacion || '',
+    contactoReclutador: initialData?.contactoReclutador || '',
+    status: initialData?.status || 'EN_PROCESO' as JobStatus,
   });
 
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<Date | undefined>(
+    initialData?.fechaPostulacion ? new Date(initialData.fechaPostulacion) : undefined
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,7 +69,9 @@ export const JobForm = ({ onSubmit, onCancel }: JobFormProps) => {
   return (
     <Card className="w-full max-w-2xl mx-auto animate-fade-in">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-primary">Nueva Postulación</CardTitle>
+        <CardTitle className="text-2xl font-bold text-primary">
+          {isEditing ? 'Editar Postulación' : 'Nueva Postulación'}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -186,7 +192,7 @@ export const JobForm = ({ onSubmit, onCancel }: JobFormProps) => {
 
           <div className="flex gap-2 pt-4">
             <Button type="submit" className="flex-1">
-              Guardar Postulación
+              {isEditing ? 'Actualizar Postulación' : 'Guardar Postulación'}
             </Button>
             <Button type="button" variant="outline" onClick={onCancel}>
               Cancelar
