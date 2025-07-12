@@ -71,19 +71,6 @@ Una aplicación moderna para el seguimiento de postulaciones laborales, desarrol
 - **📱 Mobile First:** Experiencia optimizada para móviles
 - **♿ Accesibilidad:** Cumple con estándares de accesibilidad web
 
-## 🏃‍♂️ Desarrollo Local
-
-```bash
-# Instalar dependencias
-npm install
-
-# Ejecutar en modo desarrollo
-npm run dev
-
-# Construir para producción
-npm run build
-```
-
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT.
