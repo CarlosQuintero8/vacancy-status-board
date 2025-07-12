@@ -34,7 +34,7 @@ export const JobForm = ({ onSubmit, onCancel, initialData, isEditing = false }: 
   });
 
   const [date, setDate] = useState<Date | undefined>(
-    initialData?.fechaPostulacion ? new Date(initialData.fechaPostulacion) : undefined
+    initialData?.fechaPostulacion ? new Date(initialData.fechaPostulacion + 'T12:00:00') : undefined
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -45,7 +45,8 @@ export const JobForm = ({ onSubmit, onCancel, initialData, isEditing = false }: 
 
     onSubmit({
       ...formData,
-      fechaPostulacion: date ? format(date, 'yyyy-MM-dd') : '',
+      // Usar setUTCHours para asegurar que la fecha se guarde correctamente sin problemas de zona horaria
+      fechaPostulacion: date ? format(new Date(date.setHours(12, 0, 0, 0)), 'yyyy-MM-dd') : '',
     });
 
     // Reset form

@@ -57,7 +57,7 @@ export const JobCard = ({ application, onDelete, onEdit }: JobCardProps) => {
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-muted-foreground" />
             <span className="text-sm">
-              {format(new Date(application.fechaPostulacion), "PPP", { locale: es })}
+              {format(new Date(application.fechaPostulacion + 'T12:00:00'), "PPP", { locale: es })}
             </span>
           </div>
         )}
